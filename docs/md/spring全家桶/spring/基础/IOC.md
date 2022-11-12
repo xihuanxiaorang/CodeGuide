@@ -8,7 +8,7 @@ modified: 2022-09-18 15:48:17
 number headings: auto, first-level 1, max 6, 1.1.
 ---
 
-# Spring-IOC模块
+# Spring-IOC 模块
 
 > 本章节所涉及到的代码在 [GitHub - xihuanxiaorang/spring-study: 用于spring学习](https://github.com/xihuanxiaorang/spring-study) 仓库中的 `ioc` 模块，可以自行查看。
 

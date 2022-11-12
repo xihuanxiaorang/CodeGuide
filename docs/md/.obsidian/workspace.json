@@ -1,0 +1,162 @@
+{
+  "main": {
+    "id": "20821e5cfeeadf01",
+    "type": "split",
+    "children": [
+      {
+        "id": "6f34aaada56849e9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "15f3fb5ea40d3c84",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Templates/LeetCode-数据结构.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "f3373c1a06a1f021",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "数据结构与算法/README.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "76761ec29d05dd6a",
+    "type": "split",
+    "children": [
+      {
+        "id": "8596c06128cf434d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "28bced6485af07ad",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": true,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "7ad683411272910d",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "byModifiedTime"
+              }
+            }
+          },
+          {
+            "id": "c12a5dbad130a48e",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "horizontal",
+    "width": 373
+  },
+  "right": {
+    "id": "039754b6c9feae6e",
+    "type": "split",
+    "children": [
+      {
+        "id": "437ddd7a9d6afe4f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "cf845aaada85a286",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "数据结构与算法/README.md",
+                "collapseAll": true,
+                "extraContext": false,
+                "sortOrder": "byCreatedTime",
+                "showSearch": true,
+                "searchQuery": "",
+                "backlinkCollapsed": true,
+                "unlinkedCollapsed": false
+              }
+            }
+          },
+          {
+            "id": "89e6a9336c5d2aac",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "数据结构与算法/README.md"
+              }
+            }
+          },
+          {
+            "id": "6e626e165da5a884",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "cb3b8bd09d06f9cd",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "horizontal",
+    "width": 326.5
+  },
+  "active": "f3373c1a06a1f021",
+  "lastOpenFiles": [
+    "数据结构与算法/算法/其他/逆波兰表达式.md",
+    "Templates/Common.md",
+    "数据结构与算法/算法/排序算法/鸡尾酒排序.md",
+    "数据结构与算法/算法/排序算法/快速排序.md",
+    "数据结构与算法/算法/排序算法/冒泡排序.md",
+    "数据结构与算法/数据结构/线性表/数组.md",
+    "数据结构与算法/数据结构/README.md",
+    "数据结构与算法/数据结构/线性表/队列.md",
+    "数据结构与算法/数据结构/线性表/链表.md",
+    "数据结构与算法/数据结构/线性表/栈.md"
+  ]
+}

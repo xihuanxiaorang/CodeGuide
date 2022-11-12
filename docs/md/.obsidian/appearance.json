@@ -1,0 +1,20 @@
+{
+  "cssTheme": "Minimal",
+  "theme": "system",
+  "interfaceFontFamily": "小赖字体 SC,霞鹜文楷,仓耳今楷03",
+  "baseFontSize": 15,
+  "baseFontSizeAction": false,
+  "monospaceFontFamily": "JetBrains Mono,小赖字体 SC",
+  "textFontFamily": "小赖字体 SC,霞鹜文楷,仓耳今楷03",
+  "enabledCssSnippets": [
+    "tag-pills",
+    "round-checkbox",
+    "list-outline",
+    "custom-admonitions.48953a",
+    "auto-fade-control",
+    "1",
+    "width"
+  ],
+  "translucency": false,
+  "accentColor": ""
+}

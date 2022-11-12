@@ -1,0 +1,64 @@
+{
+  "obsidian-pangu:pangu-format": [],
+  "easy-typing-obsidian:easy-typing-format-selection": [],
+  "obsidian-excalidraw-plugin:insert-link-to-element": [],
+  "hotkey-helper:browse-plugins": [],
+  "obsidian-linter:lint-file": [],
+  "app:toggle-left-sidebar": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "Q"
+    }
+  ],
+  "app:toggle-right-sidebar": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "R"
+    }
+  ],
+  "editor:toggle-source": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "Numpad0"
+    }
+  ],
+  "obsidian-auto-link-title:enhance-url-with-title": [],
+  "obsidian-hider:toggle-app-ribbon": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "L"
+    }
+  ],
+  "obsidian-underline:toggle-link-heading": [],
+  "obsidian-underline:toggle-link-block": [],
+  "obsidian-editing-toolbar:header1-text": [],
+  "obsidian-editing-toolbar:header2-text": [],
+  "obsidian-editing-toolbar:header3-text": [],
+  "obsidian-editing-toolbar:header4-text": [],
+  "obsidian-editing-toolbar:header5-text": [],
+  "obsidian-editing-toolbar:header6-text": [],
+  "obsidian-editing-toolbar:header0-text": [],
+  "obsidian-editing-toolbar:hide-show-menu": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "+"
+    }
+  ],
+  "workspace:goto-tab-2": [],
+  "workspace:goto-tab-1": [],
+  "workspace:goto-tab-3": [],
+  "workspace:goto-tab-4": [],
+  "workspace:goto-tab-5": [],
+  "workspace:goto-tab-6": [],
+  "editor:toggle-checklist-status": []
+}

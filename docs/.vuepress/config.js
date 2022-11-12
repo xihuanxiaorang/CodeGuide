@@ -93,6 +93,9 @@ module.exports = {
         [
             {globalUIComponents: []}
         ],
+        ['@vuepress/search', {
+            searchMaxSuggestions: 10
+        }],
         // ['@vssue/vuepress-plugin-vssue', {
         //     platform: 'github-v3', //v3的platform是github，v4的是github-v4
         //     // 其他的 Vssue 配置
@@ -202,6 +205,10 @@ module.exports = {
                         text: 'Java',
                         items: [
                             {
+                                text: '面经手册',
+                                link: '/md/java/interview/HashMap.md'
+                            },
+                            {
                                 text: '基础技术',
                                 link: '/md/java/core/'
                             }
@@ -230,6 +237,7 @@ module.exports = {
                     "/md/spring全家桶/spring/": genBarSpring(),
                     "/md/数据结构与算法/数据结构/": genAlgorithmDataStructures(),
                     "/md/数据结构与算法/算法/": genAlgorithmLogic(),
+                    "/md/java/interview/": genBarJavaInterview(),
                 }
             }
         }
@@ -284,12 +292,6 @@ function genBarSpring() {
 function genAlgorithmDataStructures() {
     return [
         {
-            title: "介绍",
-            collapsable: false,
-            sidebarDepth: 0,
-            path: '/md/数据结构与算法/数据结构/',
-        },
-        {
             title: "线性数据结构",
             collapsable: false,
             sidebarDepth: 0,
@@ -339,6 +341,36 @@ function genAlgorithmLogic() {
             sidebarDepth: 0,
             children: [
 
+            ]
+        }
+    ]
+}
+
+// java-interview
+function genBarJavaInterview() {
+    return [
+        {
+            title: "数据结构和算法",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "HashMap.md",
+            ]
+        },
+        {
+            title: "MySQL",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "MySQL.md",
+            ]
+        },
+        {
+            title: "Spring",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "Spring.md",
             ]
         }
     ]
