@@ -1,0 +1,2 @@
+Sitemap: https://xiaorang.fun/sitemap.xml
+User-agent: *
