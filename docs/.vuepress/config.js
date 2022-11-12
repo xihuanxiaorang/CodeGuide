@@ -125,12 +125,12 @@ module.exports = {
         // ['copyright', {
         //     noCopy: false, // 允许复制内容
         //     minLength: 100, // 如果长度超过 100 个字符
-        //     authorName: "https://bugstack.cn",
-        //     clipboardComponent: "请注明文章出处, [bugstack虫洞栈](https://bugstack.cn)"
+        //     authorName: "https://xiaorang.fun",
+        //     clipboardComponent: "请注明文章出处, [小让の糖果屋](https://xiaorang.fun)"
         // }],
         // see: https://github.com/ekoeryanto/vuepress-plugin-sitemap
         // ['sitemap', {
-        //     hostname: 'https://bugstack.cn'
+        //     hostname: 'https://xiaorang.fun'
         // }],
         // see: https://github.com/IOriens/vuepress-plugin-baidu-autopush
         ['vuepress-plugin-baidu-autopush', {}],
@@ -190,11 +190,11 @@ module.exports = {
                         items: [
                             {
                                 text: '数据结构',
-                                link: '/md/data-structures/data-structures.md'
+                                link: '/md/数据结构与算法/数据结构/'
                             },
                             {
                                 text: '算法主题',
-                                link: '/md/algorithm/algorithm.md'
+                                link: '/md/数据结构与算法/算法/排序算法/冒泡排序.md'
                             }
                         ]
                     },
@@ -228,6 +228,8 @@ module.exports = {
                 sidebar: {
                     "/md/java/core/": genBarJavaCore(),
                     "/md/spring全家桶/spring/": genBarSpring(),
+                    "/md/数据结构与算法/数据结构/": genAlgorithmDataStructures(),
+                    "/md/数据结构与算法/算法/": genAlgorithmLogic(),
                 }
             }
         }
@@ -273,6 +275,70 @@ function genBarSpring() {
                 "源码/Spring-BeanDefinition加载流程分析.md",
                 "源码/Spring-ConfigurationClassPostProcessor后置处理器详解.md",
                 "源码/Spring事件订阅与发布原理分析.md"
+            ]
+        }
+    ]
+}
+
+// 数据结构
+function genAlgorithmDataStructures() {
+    return [
+        {
+            title: "介绍",
+            collapsable: false,
+            sidebarDepth: 0,
+            path: '/md/数据结构与算法/数据结构/',
+        },
+        {
+            title: "线性数据结构",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "线性表/数组.md",
+                "线性表/链表.md",
+                "线性表/栈.md",
+                "线性表/队列.md",
+            ]
+        },
+        {
+            title: "树形数据结构",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "树/二叉树.md",
+                "树/红黑树.md",
+            ]
+        },
+    ]
+}
+
+// 算法
+function genAlgorithmLogic() {
+    return [
+        {
+            title: "排序算法",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "排序算法/冒泡排序.md",
+                "排序算法/鸡尾酒排序.md",
+                "排序算法/快速排序.md",
+            ]
+        },
+        {
+            title: "其他",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "其他/逆波兰表达式.md",
+            ]
+        },
+        {
+            title: "刷题",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+
             ]
         }
     ]
