@@ -297,7 +297,15 @@ function genBarSpring() {
 function genAlgorithmDataStructures() {
     return [
         {
-            title: "线性数据结构",
+            title: "介绍",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "",
+            ]
+        },
+        {
+            title: "线性表",
             collapsable: false,
             sidebarDepth: 0,
             children: [
@@ -308,7 +316,7 @@ function genAlgorithmDataStructures() {
             ]
         },
         {
-            title: "树形数据结构",
+            title: "树",
             collapsable: false,
             sidebarDepth: 0,
             children: [
