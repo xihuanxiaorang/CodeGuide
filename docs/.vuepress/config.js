@@ -185,8 +185,25 @@ module.exports = {
                 editLinkText: "在 GitHub 上编辑此页",
                 lastUpdated: "上次更新",
                 nav: [
+                    // {
+                    //     text: '导读', link: '/md/other/guide-to-reading.md'
+                    // },
                     {
-                        text: '导读', link: '/md/other/guide-to-reading.md'
+                        text: 'Java',
+                        items: [
+                            {
+                                text: '面试宝典',
+                                link: '/md/java/interview/HashMap.md'
+                            },
+                            {
+                                text: '基础技术',
+                                link: '/md/java/core/'
+                            }
+                        ]
+                    },
+                    {
+                        text: '深入设计模式',
+                        link: '/md/设计模式/'
                     },
                     {
                         text: '算法',
@@ -198,19 +215,6 @@ module.exports = {
                             {
                                 text: '算法主题',
                                 link: '/md/数据结构与算法/算法/排序算法/冒泡排序.md'
-                            }
-                        ]
-                    },
-                    {
-                        text: 'Java',
-                        items: [
-                            {
-                                text: '面试宝典',
-                                link: '/md/java/interview/HashMap.md'
-                            },
-                            {
-                                text: '基础技术',
-                                link: '/md/java/core/'
                             }
                         ]
                     },
@@ -238,6 +242,7 @@ module.exports = {
                     "/md/数据结构与算法/数据结构/": genAlgorithmDataStructures(),
                     "/md/数据结构与算法/算法/": genAlgorithmLogic(),
                     "/md/java/interview/": genBarJavaInterview(),
+                    "/md/设计模式/": genBarDesignPattern(),
                 }
             }
         }
@@ -371,6 +376,54 @@ function genBarJavaInterview() {
             sidebarDepth: 0,
             children: [
                 "Spring.md",
+            ]
+        }
+    ]
+}
+
+// 设计模式
+function genBarDesignPattern() {
+    return [
+        {
+            title: "介绍",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "",
+                "七大设计原则.md",
+            ]
+        },
+        {
+            title: "创建型模式",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "工厂方法模式.md",
+                "抽象工厂模式.md",
+                "建造者模式.md",
+                "单例模式.md",
+            ]
+        },
+        {
+            title: "结构型模式",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "适配器模式.md",
+                "享元模式.md",
+                "代理模式.md",
+            ]
+        },
+        {
+            title: "行为型模式",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "责任链模式.md",
+                "观察者模式.md",
+                "状态模式.md",
+                "策略模式.md",
+                "模板方法模式.md",
             ]
         }
     ]
