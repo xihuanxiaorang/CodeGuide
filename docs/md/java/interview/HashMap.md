@@ -1,7 +1,7 @@
 ---
 title: HashMap
 tags:
-  - 面经
+  - 面试宝典
   - 数据结构
   - hashmap
 created: 2022-11-13 05:48:45

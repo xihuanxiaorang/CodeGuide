@@ -1,7 +1,7 @@
 module.exports = {
     port: "8080",
-    dest: ".site",
-    base: "/",
+    // dest: ".site",
+    base: "/blog/",
     // 是否开启默认预加载js
     shouldPrefetch: (file, type) => {
         return false;
@@ -205,7 +205,7 @@ module.exports = {
                         text: 'Java',
                         items: [
                             {
-                                text: '面经手册',
+                                text: '面试宝典',
                                 link: '/md/java/interview/HashMap.md'
                             },
                             {

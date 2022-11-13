@@ -8,7 +8,8 @@
   "private": true,
   "scripts": {
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "deploy": "sh deploy.sh"
   },
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^1.8.2",

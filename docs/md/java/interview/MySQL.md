@@ -1,7 +1,7 @@
 ---
 title: MySQL
 tags:
-  - 面经
+  - 面试宝典
   - mysql
 created: 2022-11-13 05:48:45
 modified: 2022-11-13 07:12:33
