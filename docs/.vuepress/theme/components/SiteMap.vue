@@ -123,7 +123,7 @@ export default {
             list: [
               {
                 title: 'Spring 源码分析',
-                url: '/md/spring/source-code/index.html'
+                url: '/md/spring全家桶/spring/源码/'
               },
             ]
           },
@@ -131,8 +131,8 @@ export default {
             title: '面向对象',
             list: [
               {
-                title: '设计模式',
-                url: '/md/develop/design-pattern/index.html'
+                title: '深入设计模式',
+                url: '/md/设计模式/'
               },
             ]
           },

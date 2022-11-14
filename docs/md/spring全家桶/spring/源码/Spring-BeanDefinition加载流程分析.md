@@ -8,6 +8,8 @@ modified: 2022-10-19 16:18:47
 number headings: auto, first-level 1, max 6, _.1.1.
 ---
 
+# Spring-BeanDefinition加载流程分析
+
 ## 1. 环境搭建
 
 利用 [Spring 源码环境搭建](../Spring源码环境搭建/README.md) 这篇文章中搭建好的 Spring 源码环境，编写一个关于 Spring BeanDefinition 的测试案例，然后根据该测试案例去逐步分析 Spring BeanDefinition 加载的整个流程。

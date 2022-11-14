@@ -8,6 +8,8 @@ modified: 2022-10-23 04:51:03
 number headings: auto, first-level 1, max 6, _.1.1.
 ---
 
+# Spring-ConfigurationClassPostProcessor后置处理器详解
+
 ## 1. 何时注册的后置处理器？
 
 1. 记性好的小伙伴可能还记得在 [Spring-BeanDefinition加载流程分析](Spring-BeanDefinition加载流程分析.md) 这一篇文章的 `2.3.3.2.3` 小节中，最后会调用 `AnnotationConfigUtils` 工具类中的 `registerAnnotationConfigProcessors()` 方法 **往 Spring 容器中注册一些与注解有关的后置处理器的 bean 定义信息**，注册的后置处理器中就包括今天源码分析时的主角，`ConfigurationClassPostProcessor` 后置处理器。

@@ -8,6 +8,8 @@ modified: 2022-09-24 14:56:53
 number headings: auto, first-level 1, max 6, _.1.1.
 ---
 
+# Spring注册Bean的几种方式
+
 ## 1. 环境搭建
 
 利用 [Spring 源码环境搭建](../Spring源码环境搭建/README.md) 这篇文章中搭建好的 Spring 源码环境，总结一下往 Spring 中注册 Bean 到底有几种方式。

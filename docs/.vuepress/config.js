@@ -215,6 +215,10 @@ module.exports = {
                             {
                                 text: '算法主题',
                                 link: '/md/数据结构与算法/算法/排序算法/冒泡排序.md'
+                            },
+                            {
+                                text: 'LeetCode',
+                                link: '/md/LeetCode/36.后缀表达式.md'
                             }
                         ]
                     },
@@ -227,7 +231,7 @@ module.exports = {
                             },
                             {
                                 text: 'SpringMVC',
-                                link: '/md/spring全家桶/springmvc/基础/'
+                                link: '/md/spring全家桶/springmvc/基础/SpringMVC.md'
                             },
                             {
                                 text: 'SpringSecurity',
@@ -239,10 +243,12 @@ module.exports = {
                 sidebar: {
                     "/md/java/core/": genBarJavaCore(),
                     "/md/spring全家桶/spring/": genBarSpring(),
+                    "/md/spring全家桶/springmvc/": genBarSpringMVC(),
                     "/md/数据结构与算法/数据结构/": genAlgorithmDataStructures(),
                     "/md/数据结构与算法/算法/": genAlgorithmLogic(),
                     "/md/java/interview/": genBarJavaInterview(),
                     "/md/设计模式/": genBarDesignPattern(),
+                    "/md/LeetCode/": genBarLeetCode(),
                 }
             }
         }
@@ -267,7 +273,7 @@ function genBarJavaCore() {
 function genBarSpring() {
     return [
         {
-            title: "Spring基础",
+            title: "基础",
             collapsable: false,
             sidebarDepth: 0,
             children: [
@@ -279,15 +285,38 @@ function genBarSpring() {
             ]
         },
         {
-            title: "Spring源码分析",
+            title: "源码分析",
             collapsable: false,
             sidebarDepth: 0,
             children: [
+                "源码/",
                 "源码/Spring源码环境搭建.md",
                 "源码/Spring注册Bean的几种方式.md",
                 "源码/Spring-BeanDefinition加载流程分析.md",
                 "源码/Spring-ConfigurationClassPostProcessor后置处理器详解.md",
                 "源码/Spring事件订阅与发布原理分析.md"
+            ]
+        }
+    ]
+}
+
+// springmvc
+function genBarSpringMVC() {
+    return [
+        {
+            title: "基础",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "基础/SpringMVC.md",
+            ]
+        },
+        {
+            title: "源码分析",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                
             ]
         }
     ]
@@ -346,14 +375,6 @@ function genAlgorithmLogic() {
             sidebarDepth: 0,
             children: [
                 "其他/逆波兰表达式.md",
-            ]
-        },
-        {
-            title: "刷题",
-            collapsable: false,
-            sidebarDepth: 0,
-            children: [
-
             ]
         }
     ]
@@ -434,5 +455,37 @@ function genBarDesignPattern() {
                 "模板方法模式.md",
             ]
         }
+    ]
+}
+
+// LeetCode
+function genBarLeetCode() {
+    return [
+        {
+            title: "链表",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "206.反转链表.md",
+                "237.删除链表中的节点.md",
+            ]
+        },
+        {
+            title: "栈",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "20.有效的括号.md",
+                "36.后缀表达式.md",
+            ]
+        },
+        {
+            title: "队列",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+
+            ]
+        },
     ]
 }
