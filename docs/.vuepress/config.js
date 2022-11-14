@@ -342,6 +342,7 @@ function genAlgorithmDataStructures() {
                 "线性表/链表.md",
                 "线性表/栈.md",
                 "线性表/队列.md",
+                "线性表/双端队列.md",
             ]
         },
         {
@@ -477,6 +478,7 @@ function genBarLeetCode() {
             children: [
                 "20.有效的括号.md",
                 "36.后缀表达式.md",
+                "剑指 Offer 09. 用两个栈实现队列.md",
             ]
         },
         {

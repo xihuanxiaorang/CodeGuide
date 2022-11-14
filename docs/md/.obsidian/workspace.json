@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "spring全家桶/springmvc/基础/SpringMVC.md",
+                "file": "LeetCode/剑指 Offer 09. 用两个栈实现队列.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "spring全家桶/springmvc/基础/SpringMVC.md",
+                "file": "LeetCode/剑指 Offer 09. 用两个栈实现队列.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "spring全家桶/springmvc/基础/SpringMVC.md"
+                "file": "LeetCode/剑指 Offer 09. 用两个栈实现队列.md"
               }
             }
           },
@@ -135,15 +135,15 @@
   },
   "active": "0808c29acc118290",
   "lastOpenFiles": [
+    "数据结构与算法/数据结构/线性表/双端队列.md",
+    "数据结构与算法/数据结构/线性表/队列.md",
+    "数据结构与算法/数据结构/线性表/栈.md",
+    "LeetCode/剑指 Offer 09. 用两个栈实现队列.md",
     "spring全家桶/springmvc/基础/SpringMVC.md",
     "spring全家桶/spring/基础/AOP.md",
     "LeetCode/36.后缀表达式.md",
     "设计模式/观察者模式.md",
     "spring全家桶/spring/源码/Spring事件订阅与发布原理分析.md",
-    "设计模式/模板方法模式.md",
-    "设计模式/抽象工厂模式.md",
-    "设计模式/代理模式.md",
-    "设计模式/工厂方法模式.md",
-    "设计模式/建造者模式.md"
+    "设计模式/模板方法模式.md"
   ]
 }
