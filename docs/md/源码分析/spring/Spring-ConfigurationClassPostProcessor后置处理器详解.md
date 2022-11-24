@@ -10,7 +10,7 @@ number headings: auto, first-level 1, max 6, _.1.1.
 
 # Spring-ConfigurationClassPostProcessor后置处理器详解
 
-## 1. 何时注册的后置处理器？
+## 1. 何时注册的该后置处理器？
 
 1. 记性好的小伙伴可能还记得在 [Spring-BeanDefinition加载流程分析](Spring-BeanDefinition加载流程分析.md) 这一篇文章的 `2.3.3.2.3` 小节中，最后会调用 `AnnotationConfigUtils` 工具类中的 `registerAnnotationConfigProcessors()` 方法 **往 Spring 容器中注册一些与注解有关的后置处理器的 bean 定义信息**，注册的后置处理器中就包括今天源码分析时的主角，`ConfigurationClassPostProcessor` 后置处理器。
 2. 上面这种方式是在使用 `ClassPathXmlApplicationContext` 上下文解析 `XML` 配置文件加载 `bean` 定义信息时注册的该后置处理器，如果咱们是基于注解开发的话，就会使用 `AnnotationConfigApplicationContext` 上下文，在 `AnnotationConfigApplicationContext` 的构造函数中，

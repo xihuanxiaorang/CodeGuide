@@ -160,7 +160,7 @@ export function resolveHeaders (page) {
       title: h.title,
       basePath: page.path,
       path: page.path + '#' + h.slug,
-      children: h.children || []
+      children: page.frontmatter.onShowH2 ? [] : (h.children || [])
     }))
   }]
 }

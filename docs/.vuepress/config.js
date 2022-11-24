@@ -177,6 +177,7 @@ module.exports = {
         editLinks: true,
         sidebarDepth: 0,
         lastUpdated: 'Last Updated',
+        displayAllHeaders: false,
         //smoothScroll: true,
         locales: {
             "/": {
@@ -190,11 +191,7 @@ module.exports = {
                     // },
                     {
                         text: 'Java',
-                        items: [
-                            {
-                                text: '面试宝典',
-                                link: '/md/java/interview/HashMap.md'
-                            },
+                        items: [                          
                             {
                                 text: '基础技术',
                                 link: '/md/java/core/'
@@ -218,37 +215,32 @@ module.exports = {
                             },
                             {
                                 text: 'LeetCode',
-                                link: '/md/LeetCode/36.后缀表达式.md'
+                                link: '/md/LeetCode/206.反转链表.md'
                             }
                         ]
                     },
                     {
                         text: 'Spring全家桶',
-                        items: [
-                            {
-                                text: 'Spring',
-                                link: '/md/spring全家桶/spring/基础/IOC/'
-                            },
-                            {
-                                text: 'SpringMVC',
-                                link: '/md/spring全家桶/springmvc/基础/SpringMVC.md'
-                            },
-                            {
-                                text: 'SpringSecurity',
-                                link: '/md/spring全家桶/spring-security/基础/'
-                            },
-                        ]
-                    }
+                        link: '/md/spring全家桶/spring/IOC.md'
+                    },
+                    {
+                        text: '面试宝典',
+                        link: '/md/面试宝典/basic/Java基础面试题（上）.md'
+                    },
+                    {
+                        text: '源码分析',
+                        link: '/md/源码分析/spring/'
+                    },
                 ],
                 sidebar: {
                     "/md/java/core/": genBarJavaCore(),
-                    "/md/spring全家桶/spring/": genBarSpring(),
-                    "/md/spring全家桶/springmvc/": genBarSpringMVC(),
+                    "/md/设计模式/": genBarDesignPattern(),
                     "/md/数据结构与算法/数据结构/": genAlgorithmDataStructures(),
                     "/md/数据结构与算法/算法/": genAlgorithmLogic(),
-                    "/md/java/interview/": genBarJavaInterview(),
-                    "/md/设计模式/": genBarDesignPattern(),
                     "/md/LeetCode/": genBarLeetCode(),
+                    "/md/spring全家桶/": genBarSpring(),
+                    "/md/面试宝典/": genBarJavaInterview(),
+                    "/md/源码分析/": genBarSourceCode(),
                 }
             }
         }
@@ -269,54 +261,49 @@ function genBarJavaCore() {
     ]
 }
 
-// spring
-function genBarSpring() {
+// 设计模式
+function genBarDesignPattern() {
     return [
         {
-            title: "基础",
+            title: "介绍",
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "基础/IOC.md",
-                "基础/AOP.md",
-                "基础/JDBC.md",
-                "基础/事务.md",
-                "基础/Spring注解驱动开发.md",
+                "",
+                "七大设计原则.md",
             ]
         },
         {
-            title: "源码分析",
+            title: "创建型模式",
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "源码/",
-                "源码/Spring源码环境搭建.md",
-                "源码/Spring注册Bean的几种方式.md",
-                "源码/Spring-BeanDefinition加载流程分析.md",
-                "源码/Spring-ConfigurationClassPostProcessor后置处理器详解.md",
-                "源码/Spring事件订阅与发布原理分析.md"
-            ]
-        }
-    ]
-}
-
-// springmvc
-function genBarSpringMVC() {
-    return [
-        {
-            title: "基础",
-            collapsable: false,
-            sidebarDepth: 0,
-            children: [
-                "基础/SpringMVC.md",
+                "工厂方法模式.md",
+                "抽象工厂模式.md",
+                "建造者模式.md",
+                "单例模式.md",
             ]
         },
         {
-            title: "源码分析",
+            title: "结构型模式",
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                
+                "适配器模式.md",
+                "享元模式.md",
+                "代理模式.md",
+            ]
+        },
+        {
+            title: "行为型模式",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "责任链模式.md",
+                "观察者模式.md",
+                "状态模式.md",
+                "策略模式.md",
+                "模板方法模式.md",
             ]
         }
     ]
@@ -381,84 +368,6 @@ function genAlgorithmLogic() {
     ]
 }
 
-// java-interview
-function genBarJavaInterview() {
-    return [
-        {
-            title: "数据结构和算法",
-            collapsable: false,
-            sidebarDepth: 0,
-            children: [
-                "HashMap.md",
-            ]
-        },
-        {
-            title: "MySQL",
-            collapsable: false,
-            sidebarDepth: 0,
-            children: [
-                "MySQL.md",
-            ]
-        },
-        {
-            title: "Spring",
-            collapsable: false,
-            sidebarDepth: 0,
-            children: [
-                "Spring.md",
-            ]
-        }
-    ]
-}
-
-// 设计模式
-function genBarDesignPattern() {
-    return [
-        {
-            title: "介绍",
-            collapsable: false,
-            sidebarDepth: 0,
-            children: [
-                "",
-                "七大设计原则.md",
-            ]
-        },
-        {
-            title: "创建型模式",
-            collapsable: false,
-            sidebarDepth: 0,
-            children: [
-                "工厂方法模式.md",
-                "抽象工厂模式.md",
-                "建造者模式.md",
-                "单例模式.md",
-            ]
-        },
-        {
-            title: "结构型模式",
-            collapsable: false,
-            sidebarDepth: 0,
-            children: [
-                "适配器模式.md",
-                "享元模式.md",
-                "代理模式.md",
-            ]
-        },
-        {
-            title: "行为型模式",
-            collapsable: false,
-            sidebarDepth: 0,
-            children: [
-                "责任链模式.md",
-                "观察者模式.md",
-                "状态模式.md",
-                "策略模式.md",
-                "模板方法模式.md",
-            ]
-        }
-    ]
-}
-
 // LeetCode
 function genBarLeetCode() {
     return [
@@ -487,6 +396,90 @@ function genBarLeetCode() {
             sidebarDepth: 0,
             children: [
 
+            ]
+        },
+    ]
+}
+
+// spring全家桶
+function genBarSpring() {
+    return [
+        {
+            title: "Spring",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "spring/IOC.md",
+                "spring/AOP.md",
+                "spring/JDBC.md",
+                "spring/事务.md",
+                "spring/Spring注解驱动开发.md",
+            ]
+        },
+        {
+            title: "SpringMVC",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "springmvc/",
+            ]
+        },
+    ]
+}
+
+// java-interview
+function genBarJavaInterview() {
+    return [
+        {
+            title: "Java 基础",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "basic/Java基础面试题（上）.md",
+                "basic/Java基础面试题（下）.md",
+            ]
+        },
+        {
+            title: "数据结构和算法",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "HashMap.md",
+            ]
+        },
+        {
+            title: "MySQL",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "MySQL.md",
+            ]
+        },
+        {
+            title: "Spring",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "Spring.md",
+            ]
+        }
+    ]
+}
+
+// 面试宝典
+function genBarSourceCode() {
+    return [
+        {
+            title: "Spring",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "spring/",
+                "spring/Spring源码环境搭建.md",
+                "spring/Spring注册Bean的几种方式.md",
+                "spring/Spring-BeanDefinition加载流程分析.md",
+                "spring/Spring-ConfigurationClassPostProcessor后置处理器详解.md",
+                "spring/Spring事件订阅与发布原理分析.md"
             ]
         },
     ]
