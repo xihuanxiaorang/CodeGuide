@@ -320,11 +320,17 @@ LOGGER.debug("s2 == s3？{}", s2 == s3);
 
 那么有没有办法让 `s2` 和 `s3` 指向的是同一个对象呢？办法是有的，还记得咱们上面提到的 `intern()` 方法，可以调用 `s2.intern()` 方法将 `s2` 的引用地址保存到字符串常量池中，之后在创建字符串 `s3` 的时候，发现字符串常量池中已经存在 "abcdef"，则不会再创建一个新的对象，而是直接使用该引用，即 `s2` 和 `s3` 会指向同一个对象，`s2 == s3` 的输出结果也就会变成 `true`。
 
-## 3. String 为什么不可变？不可变有什么好处？
+## 3. 为什么 String 是不可变类？以及为什么设计成不可变类？
 
-### 3.1. 不可变是什么意思？
+### 3.1. 什么是不可变类？
 
-不可变类（immutable）：类的实例一旦创建后，其内容（状态）就不可改变。
+一个类的对象在通过构造方法创建之后如果状态不会再被改变，那么它就是一个不可变（immutable）类。它的所有成员变量的赋值仅在构造方法中完成，不会提供任何 `setter()` 方法供外部类去修改。
+
+自从有了多线程，生产力就被无限放大了，所有的程序员都爱它，因为强大的硬件能力被充分地利用了。但与此同时，所有的程序员都对它心生忌惮，因为一不小心，多线程就会把对象的状态变得混乱不堪。
+
+为了保证状态的原子性、可见性、有序性，程序员可以说是竭尽所能。其中，`synchronized`（同步）关键字是最简单最入门的一种解决方案。
+
+假如说类是不可变的，那么对象的状态也就是不可变的。这样的话，每次修改对象的状态，就会产生一个新的对象供不同的线程使用，程序员就不必再担心并发问题了。
 
 ```java
 public void testFinal() {
@@ -338,19 +344,19 @@ public void testFinal() {
 ### 3.2. String 为什么不可变？
 
 1. `String` 类中的 `value` 属性是一个 `char` 类型的数组，被 `final` 修饰，保证该数组一旦被初始化之后，就不能再改变其引用了。
-2. 成员变量的访问权限为 `private`，同时没有提供方法将字段暴露出来，想要修改只能通过 `String` 类提供的方法。
+2. 成员变量的访问权限为 `private`，同时没有提供方法将字段暴露出来。
 3. `String` 类中的方法不会去改动 `value` 属性的值，需要的话都是直接创建一个新的 `String` 对象并返回。
 4. `String` 类被 `final` 修饰，表示该类不可被继承。
 
-### 3.3. 不可变有什么好处？
+### 3.3. String 为什么被设计成不可变类？
 
 > 参考链接：[Why String is immutable in Java? (programcreek.com)](https://www.programcreek.com/2013/04/why-string-is-immutable-in-java/)
 
-1. 字符串常量池的需要：当创建一个字符串时，如果该字符串已经存在于池中，将返回现有字符串的引用，而不是创建一个新对象，这样的话可以节省内存空间。如果 `String` 是可变的，试想一下，字符串常量池中的某个字符串对象被很多地方引用时，此时去对该对象进行修改，则所有引用的地方都会改变，这个可能会导致预期之外的问题。
+1. 字符串常量池的需要：字符串常量池是 Java 堆内存中一个特殊的存储区域，当创建一个 `String` 对象时，如果该字符串已经存在于池中，将返回现有字符串的引用，而不是创建一个新对象，这样的话可以节省内存空间，提高效率。
 
    ![](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211240647175.jpeg)
 
-2. 可以缓存 `hash` 值：因为 `String` 的 `hash` 值经常被使用，例如用作 `HashMap` 或 `HashSet` 中的 `key`。不可变性保证了 `hash` 值也是不可变的，因此只需要进行一次计算，之后再次使用时都不再需要重新计算。
+2. hashCode 的需要：因为字符串是不可变的，所以在它第一次调用 `hashCode()` 方法的时候，其 `hash` 值就已经被缓存了，因此非常适合作为哈希值（比如说作为 `HashMap` 的键），多次调用返回的是同一个值，来提高效率。
 
    ```java
    public int hashCode() {
@@ -382,18 +388,39 @@ public void testFinal() {
 
 4. 线程安全：因为不可变的对象不能被改变，所以它们可以在多个线程之间自由共享。
 
-## 4. 能否创建一个包含可变对象的不可变对象?
+## 4. 如何自定义一个不可变类？
 
-当然可以，你只需要谨慎一点，**不要共享可变对象的引用即可，如果需要变化时，就返回原对象的一个拷贝**。最常见的例子就是对象中包含一个日期对象的引用。
+要自定义个不可变类，需要遵循以下 4 个原则:
 
-## 5. 为什么说 Java 中只有值传递？
+1. 确保类被 `final` 所修饰，不允许被其他类继承。
+2. 确保类中的所有成员变量是 `final` 的。
+3. 不要对外提供方法去修改成员变量（如 `setter()` 方法）
+4. 不可变对象的状态在创建之后就不能在改变，任何对它的改变都应该返回一个新的对象。如果 **类中包含可变类对象时**，你只需谨慎一点，**不要共享可变对象的引用** 即可，如果需要变化时，就 **返回原对象的一个拷贝**，别是对象本身。
+
+## 5. String，StringBuffer，StringBuilder 的区别是什么？
+
+- 可变性
+  - `String` 是一个不可变类，内部的 `value` 属性被 final 修饰。因此，每次对 `String` 的操作都会产生一个新的对象。
+  - `StringBuffer` 和 `StringBuiler` 是可变类，它们在字符串变更的时候，不会产生新的对象。
+- 线程安全：
+  - `String` 是不可变类，所以它是线程安全的。
+  - `StringBuffer` 是线程安全的，因为它的每个操作方法都加了 `synchronzied` 同步关键字。
+  - `StringBuilder` 不是线程安全的。
+- 性能：
+  - `String` 的性能是最低的，因为它是不可变类，意味着在做字符串拼接和修改的时候，需要反复地重新创建新的对象和分配内存。
+  - 其次是 `StringBuffer`，它要比 `String` 性能高，因为它的可变性使得字符串可以直接被修改。
+  - 性能最高的是 `StringBuilder`，因为 `StringBuffer` 加了同步锁，而 `StringBuilder` 是非阻塞的。
+
+最后再补充一下，`StringBuilder` 和 `StringBuffer` 都继承自 `AbstractStringBuilder` 抽象类。
+
+## 6. 为什么说 Java 中只有值传递？
 
 开始之前，咱们先来搞懂下面这两个概念：
 
 - 形参&实参
 - 值传递&引用传递
 
-### 5.1. 形参&实参
+### 6.1. 形参&实参
 
 方法的定义可能会用到 **参数**（有参的方法），参数在程序语言中分为：
 
@@ -413,9 +440,114 @@ public sayHello(String str) {
 }
 ```
 
-### 5.2. 值传递&引用传递
+### 6.2. 值传递&引用传递
 
 程序设计语言将实参传递给方法的方式分为两种：
 
-- 值传递
+- **值传递**：方法接收的是 **实参值的拷贝**，会创建副本。
+- **引用传递**：方法接收的是 **实参所引用的对象在堆中的地址**，不会创建副本，**对形参的修改将影响到实参**。
+
+很多设计语言（如 `C`、`C++`）提供了两种参数传递的方法，不过，**在 Java 中只有值传递**。
+
+### 6.3. 基本类型是值传递的
+
+Java 中的数据类型可以分为两种，一种是基本类型，一种是引用类型。我相信小伙伴还没看到这之前，就能够达成这样一个共识：基本类型是值传递的。这一点毫无疑问。
+
+```java
+public static void main(String[] args) {
+    int num1 = 10;
+    int num2 = 20;
+    swap(num1, num2);
+    System.out.println("num1 = " + num1);
+    System.out.println("num2 = " + num2);
+}
+
+public static void swap(int a, int b) {
+    int temp = a;
+    a = b;
+    b = temp;
+    System.out.println("a = " + a);
+    System.out.println("b = " + b);
+}
+```
+
+输出结果为：
+
+```text
+a = 20
+b = 10
+num1 = 10
+num2 = 20
+```
+
+在 `swap()` 方法中，将 `a`、`b` 的值进行交换，并不会影响 `num1` 和 `num2`。因为，`a` 和 `b` 的值只是从 `num1` 和 `num2` 拷贝过来的。也就是说，`a` 和 `b` 相当于 `num1` 和 `num2` 的副本，副本的内容无论怎么修改，都不会影响到原件的值。
+
+### 6.4. 引用类型是值传递吗？
+
+小伙伴们之所以不确定 Java 是值传递还是引用传递的，原因就出在这个引用类型上面。单从字面的意思上就容易混淆：引用类型不是引用传递吗？难道还是值传递吗？
+
+```java
+public static void main(String[] args) {
+    int[] arr = { 1, 2, 3, 4, 5 };
+    System.out.println(arr[0]);
+    change(arr);
+    System.out.println(arr[0]);
+}
+
+public static void change(int[] array) {
+    // 将数组的第一个元素变为0
+    array[0] = 0;
+}
+```
+
+输出结果为：
+
+```text
+1
+0
+```
+
+很多看了这个案例的小伙伴肯定会觉得 Java 对引用类型的参数采用的引用传递。实际上，并不是的，这里传递的还是值，只不过这个值是实参的地址！也就是说 `change()` 方法的 `array` 形参拷贝的是实参 `arr` 的地址，因此，**它和 `arr` 指向的是同一个数组对象**，这也就说明了为什么方法内部对形参的修改会影响到实参。
+
+为了更强有力地反驳 Java 对引用类型的参数采用的不是引用传递，咱们再来看下下面这个案例！
+
+```java
+public class Person {
+    private String name;
+   // 省略构造函数、Getter&Setter方法
+}
+
+public static void main(String[] args) {
+    Person xiaoZhang = new Person("小张");
+    Person xiaoLi = new Person("小李");
+    swap(xiaoZhang, xiaoLi);
+    System.out.println("xiaoZhang:" + xiaoZhang.getName());
+    System.out.println("xiaoLi:" + xiaoLi.getName());
+}
+
+public static void swap(Person person1, Person person2) {
+    Person temp = person1;
+    person1 = person2;
+    person2 = temp;
+    System.out.println("person1:" + person1.getName());
+    System.out.println("person2:" + person2.getName());
+}
+```
+
+输出结果为：
+
+```text
+person1:小李
+person2:小张
+xiaoZhang:小张
+xiaoLi:小李
+```
+
+`swap()` 方法的参数 `person1` 和 `person2` 拷贝的只是实参 `xiaoZhang` 和 `xiaoLi` 的地址。因此， `person1` 和 `person2` 的互换只是拷贝的两个地址进行互换罢了，并不会影响到实参 `xiaoZhang` 和 `xiaoLi` 。
+
+咱们通过一张图就能非常清晰这个过程。
+
+![image-20221125061322645](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211250613731.png)
+
+在进行交换前，`person1` 和 `xiaoZhang` 指向的是同一个对象（`小张`），`person2` 和 `xiaoLi` 指向的是同一个对象（`小李`），交换之后，只是让 `person1` 指向 `小李` 对象，`person2` 指向 `小张` 对象，而 `xiaoZhang` 和 `xiaoLi` 指向的还是原来的对象，并未改变，所以输出的结果如上所示。
 

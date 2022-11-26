@@ -4,34 +4,35 @@
     "type": "split",
     "children": [
       {
-        "id": "c7a703812e6e9eb6",
+        "id": "86b45419d2990a7c",
         "type": "tabs",
         "children": [
           {
-            "id": "bd258e953d15309d",
+            "id": "56b8c61e3e54c2c7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "面试宝典/MySQL.md",
+                "file": "源码分析/collection/ArrayList源码分析.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "0808c29acc118290",
+            "id": "55b7466d055ab4f8",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "面试宝典/basic/Java基础面试题（下）.md",
+                "file": "源码分析/collection/ArrayList源码分析.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -65,7 +66,7 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "byCreatedTime"
+                "sortOrder": "byCreatedTimeReverse"
               }
             }
           },
@@ -98,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "面试宝典/MySQL.md",
+                "file": "源码分析/collection/ArrayList源码分析.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -115,7 +116,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "面试宝典/MySQL.md"
+                "file": "源码分析/collection/ArrayList源码分析.md"
               }
             }
           },
@@ -145,17 +146,17 @@
     "direction": "horizontal",
     "width": 326.5
   },
-  "active": "bd258e953d15309d",
+  "active": "55b7466d055ab4f8",
   "lastOpenFiles": [
-    "面试宝典/Spring.md",
-    "spring全家桶/springmvc/README.md",
-    "spring全家桶/spring/事务.md",
-    "源码分析/spring/Spring源码环境搭建.md",
-    "面试宝典/basic/Java基础面试题（下）.md",
-    "面试宝典/basic/Java基础面试题（上）.md",
-    "java/interview/Basic.md",
+    "源码分析/collection/LinkedList源码分析.md",
+    "源码分析/collection/ArrayList源码分析.md",
     "数据结构与算法/数据结构/线性表/数组.md",
-    "数据结构与算法/数据结构/线性表/链表.md",
-    "面试宝典/MySQL.md"
+    "面试宝典/basic/Java基础面试题（下）.md",
+    "java/advanced/SPI机制详解.md",
+    "java/core/内部类.md",
+    "源码分析/spring/Spring事件订阅与发布原理分析.md",
+    "面试宝典/collection/Java集合面试题（上）.md",
+    "源码分析/spring/Spring源码环境搭建.md",
+    "Templates/面试宝典.md"
   ]
 }

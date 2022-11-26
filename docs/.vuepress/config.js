@@ -191,12 +191,7 @@ module.exports = {
                     // },
                     {
                         text: 'Java',
-                        items: [                          
-                            {
-                                text: '基础技术',
-                                link: '/md/java/core/'
-                            }
-                        ]
+                        link: '/md/java/core/内部类.md'
                     },
                     {
                         text: '深入设计模式',
@@ -229,11 +224,11 @@ module.exports = {
                     },
                     {
                         text: '源码分析',
-                        link: '/md/源码分析/spring/'
+                        link: '/md/源码分析/collection/ArrayList源码分析.md'
                     },
                 ],
                 sidebar: {
-                    "/md/java/core/": genBarJavaCore(),
+                    "/md/java/": genBarJava(),
                     "/md/设计模式/": genBarDesignPattern(),
                     "/md/数据结构与算法/数据结构/": genAlgorithmDataStructures(),
                     "/md/数据结构与算法/算法/": genAlgorithmLogic(),
@@ -247,15 +242,23 @@ module.exports = {
     }
 };
 
-// java-core
-function genBarJavaCore() {
+// java
+function genBarJava() {
     return [
         {
-            title: "基础技术",
+            title: "Java 基础",
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                
+                "core/内部类.md"
+            ]
+        },
+        {
+            title: "Java 进阶",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "advanced/SPI机制详解.md"
             ]
         }
     ]
@@ -439,12 +442,16 @@ function genBarJavaInterview() {
                 "basic/Java基础面试题（下）.md",
             ]
         },
+        // {
+        //     title: 'xxx',
+        //     path: 'xxx.md', 
+        // },
         {
-            title: "数据结构和算法",
+            title: "Java 集合",
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "HashMap.md",
+                "collection/Java集合面试题（上）.md",
             ]
         },
         {
@@ -466,9 +473,18 @@ function genBarJavaInterview() {
     ]
 }
 
-// 面试宝典
+// 源码
 function genBarSourceCode() {
     return [
+        {
+            title: "Java 集合",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "collection/ArrayList源码分析.md",
+                "collection/LinkedList源码分析.md",
+            ]
+        },
         {
             title: "Spring",
             collapsable: false,
