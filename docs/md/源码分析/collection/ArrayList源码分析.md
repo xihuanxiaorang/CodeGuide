@@ -10,6 +10,8 @@ number headings: auto, first-level 1, max 6, _.1.1.
 
 # ArrayList 源码分析
 
+> 对于动态数组数据结构有不了解的小伙伴可以参考 [数组](../../数据结构与算法/数据结构/线性表/数组.md) 这一篇文章。
+
 ## 1. 底层实现
 
 ![img](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211251445395.png)
@@ -132,7 +134,7 @@ private void writeObject(java.io.ObjectOutputStream s)
 
 从 `writeObject()` 方法的源码中可以看得出，它使用了 `ArrayList` 的实际大小 `size` 而不是数组的长度 `elementData.length` 来作为元素的上限进行序列化。
 
-此处应该有掌声！👏👏👏为 Java 源码的作者们，他们真的是太厉害了，可以用两个词来形容它们 - 殚精竭虑、精益求精。
+此处应该有掌声！👏👏👏为 Java 源码的作者们，他们真的是太厉害了，可以用两个词来形容他们 - 殚精竭虑、精益求精。
 
 ## 2. 初始化
 

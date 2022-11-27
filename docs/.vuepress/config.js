@@ -483,6 +483,7 @@ function genBarSourceCode() {
             children: [
                 "collection/ArrayList源码分析.md",
                 "collection/LinkedList源码分析.md",
+                "collection/HashMap源码分析.md",
             ]
         },
         {
