@@ -4,22 +4,35 @@
     "type": "split",
     "children": [
       {
-        "id": "86b45419d2990a7c",
+        "id": "3e29a3b62558add9",
         "type": "tabs",
         "children": [
           {
-            "id": "55b7466d055ab4f8",
+            "id": "fe89ab4c697dec18",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "源码分析/collection/LinkedList源码分析.md",
+                "file": "源码分析/collection/HashMap源码分析.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "aad5482dcfe43f9a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "源码分析/collection/HashMap源码分析.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -86,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "源码分析/collection/LinkedList源码分析.md",
+                "file": "源码分析/collection/HashMap源码分析.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -103,7 +116,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "源码分析/collection/LinkedList源码分析.md"
+                "file": "源码分析/collection/HashMap源码分析.md"
               }
             }
           },
@@ -133,17 +146,17 @@
     "direction": "horizontal",
     "width": 326.5
   },
-  "active": "55b7466d055ab4f8",
+  "active": "aad5482dcfe43f9a",
   "lastOpenFiles": [
-    "源码分析/collection/ArrayList源码分析.md",
-    "源码分析/collection/LinkedList源码分析.md",
+    "源码分析/collection/CopyOnWriteArrayList 源码分析.md",
     "源码分析/collection/HashMap源码分析.md",
+    "源码分析/collection/LinkedList源码分析.md",
+    "源码分析/collection/ArrayList源码分析.md",
     "数据结构与算法/数据结构/线性表/数组.md",
     "数据结构与算法/数据结构/线性表/链表.md",
     "数据结构与算法/数据结构/树/二叉树.md",
     "数据结构与算法/数据结构/树/红黑树.md",
     "数据结构与算法/数据结构/线性表/队列.md",
-    "数据结构与算法/数据结构/线性表/双端队列.md",
-    "面试宝典/basic/Java基础面试题（下）.md"
+    "数据结构与算法/数据结构/线性表/双端队列.md"
   ]
 }

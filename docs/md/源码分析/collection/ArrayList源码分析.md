@@ -10,7 +10,7 @@ number headings: auto, first-level 1, max 6, _.1.1.
 
 # ArrayList 源码分析
 
-> 对于动态数组数据结构有不了解的小伙伴可以参考 [数组](../../数据结构与算法/数据结构/线性表/数组.md) 这一篇文章。
+> 本篇文章搭配 [数据结构-数组](../../数据结构与算法/数据结构/线性表/数组.md) 这一篇文章一起食用更加美味！
 
 ## 1. 底层实现
 
@@ -111,6 +111,8 @@ private Object[] grow(int minCapacity) {
 
 序列化的时候，如果把整个数组都序列化的话，是不是就多序列化了 4 个内存空间。当存储的元素数量非常非常多的时候，闲置的空间就非常非常大，序列化耗费的时间就会非常非常长。于是，`ArrayList` 做了一个愉快而又聪明的决定，内部提供了两个私有方法 `writeObject()` 和 `readObject()` 来完成序列化和反序列化。
 
+Java 在序列化的时候默认调用 `ObjectOutputStream` 的 `writeObject()` 方法将对象转换成字节流并输出。而 `writeObject()` 方法会判断：如果传入的对象自己实现了 `writeObject()` 方法，则会反射调用该对象实现的 `writeObject()` 方法来实现序列化。反序列化使用的是 `ObjectInputStream` 的 `readObject()` 方法，原理类似。
+
 ```java
 private void writeObject(java.io.ObjectOutputStream s)
         throws java.io.IOException {
@@ -158,21 +160,18 @@ public ArrayList() {
      } else if (initialCapacity == 0) {
          this.elementData = EMPTY_ELEMENTDATA;
      } else {
-         throw new IllegalArgumentException("Illegal Capacity: "+
-                                            initialCapacity);
+         throw new IllegalArgumentException("Illegal Capacity: "+ initialCapacity);
      }
  }
 ```
 
 - 通常情况下，空构造函数初始化 `ArrayList` 更加常用，这种方式数组的长度会在第一次插入数据时进行扩容时设置，为默认的数组长度 `DEFAULT_CAPACITY = 10`。
 - 数组进行扩容时，需要将原数组中的元素重新拷贝一份到新数组中，这种操作的代价是很高的。所以当咱们已经知道要填充多少个元素到 `ArrayList` 中，为了提升性能，请直接初始化一个预先设定好的长度。
-- 另外，`EMPTY_ELEMENTDATA` 是一个定义好的空对象：`private static final Object[] EMPTY_ELEMENTDATA = {}`
+- 另外，`EMPTY_ELEMENTDATA` 是一个定义好的空对象：`private static final Object[] EMPTY_ELEMENTDATA = {}`。
 
 ## 3. 插入
 
-`ArrayList` 对元素的插入，其实就是对数组的操作，只不过需要特定时候扩容。
-
-`ArrayList` 新增元素有两种情况，一种是直接将元素 **添加到数组末尾**，一种是将元素 **插入到指定位置**。
+`ArrayList` 对元素的插入，其实就是对数组的操作，只不过需要特定时候扩容。`ArrayList` 新增元素时有两种情况，一种是直接将元素 **添加到数组末尾**，一种是将元素 **插入到指定位置**。
 
 ### 3.1. 添加到数组末尾
 
@@ -199,7 +198,7 @@ public boolean add(E e) {
 }
 ```
 
-- 这是插入元素时的源码，`size++` 自增，把对应元素添加进去。
+先判断是否需要扩容，然后直接通过索引将元素添加到末尾，最后 `size` 自增。
 
 ### 3.2. 插入时扩容
 
@@ -264,53 +263,49 @@ Exception in thread "main" java.lang.IndexOutOfBoundsException: Index: 2, Size: 
 
 为什么会这样呢？咱们翻开下源码学习下。
 
+```java
+public void add(int index, E element) {
+    // 检查元素插入的位置是否在合理的范围之内
+    rangeCheckForAdd(index);
+    modCount++;
+    final int s;
+    Object[] elementData;
+    // 判断是否需要扩容
+    if ((s = size) == (elementData = this.elementData).length)
+        // 条件成立的话，则进行扩容操作
+        elementData = grow();
+    // 数据拷贝迁移，把待插入位置空出来
+    // elementData:源数组；index:源数组中的起始位置；elementData：目标数组；index + 1：目标数组中的起始位置；size - index：要复制的数组元素的数量；
+    System.arraycopy(elementData, index, elementData, index + 1, s - index);
+    // 数据插入操作   
+    elementData[index] = element;
+    size = s + 1;
+}
+```
+
+插入指定位置的核心步骤包括：
+
+1. 先检查元素插入的位置是否在合理的范围之内，即 `index > size ?`。
+2. 判断是否需要扩容：`ensureCapacityInternal(size + 1);`。
+3. 数组元素迁移，把元素待插入位置之后的所有元素都复制到该位置往后，效果等同于从元素待插入位置之后的所有元素都顺序向后移动一位。
+4. 给数组指定位置赋值，也就是把待插入元素插入进来。
+
 #### 3.3.1. 容量验证
 
 ```java
-public void add(int index, E element) {
-    rangeCheckForAdd(index);
-    
-    ...
-}
-
 private void rangeCheckForAdd(int index) {
     if (index > size || index < 0)
         throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
 }
 ```
 
-- 插入指定位置时首先要使用 `rangeCheckForAdd()` 方法判断要插入位置与 `size` 的长度。
-- 通过上面的元素插入咱们知道，每插入一个元素，`size++`。
-- 所以即使咱们申请了 10 个容量长度的 `ArrayList`，但是插入指定位置时会判断元素插入位置 `index` 是否大于 `size`，如果大于的话则会抛出 `IndexOutOfBoundsException` 异常。
+插入到指定位置时首先要使用 `rangeCheckForAdd()` 方法检查要插入的位置是否在合理的范围之内。通过上面的元素插入咱们知道，每插入一个元素，`size++`。所以即使咱们申请了 10 个容量长度的 `ArrayList`，但元素插入位置 `index` 大于 `size`，如果大于的话则会抛出 `IndexOutOfBoundsException` 异常，这也就是为什么上面代码输出结果为抛出异常的原因。
 
 #### 3.3.2. 元素迁移
 
 ![插入元素迁移](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211261416749.png)
 
-插入指定位置的核心步骤包括：
-
-1. 判断 `size` 大小，是否可以插入。
-2. 判断插入后是否需要扩容：`ensureCapacityInternal(size + 1);`。
-3. 数组元素迁移，把从待插入位置之后的所有元素顺序向后移动。
-4. 给数组指定位置赋值，也就是把待插入元素插入进来。
-
-**部分源码：**
-
-```java
-public void add(int index, E element) {
-	...
-	// 判断是否需要扩容以及扩容操作
-	ensureCapacityInternal(size + 1);
-    // 数据拷贝迁移，把待插入位置空出来
-    // elementData:源数组；index:源数组中的起始位置；elementData：目标数组；index + 1：目标数组中的起始位置；size - index：要复制的数组元素的数量；
-    System.arraycopy(elementData, index, elementData, index + 1, size - index);
-    // 数据插入操作                  
-    elementData[index] = element;
-    size++;
-}
-```
-
-- 这部分源码的主要核心是在 `System.arraycopy()` 方法，在上面咱们已经演示过相应的操作方式。
+- 这部分核心是在 `System.arraycopy()` 方法，在上面咱们已经演示过相应的操作方式。
 - 这里只是设定了指定位置的迁移，可以把上面的案例代码复制下来做测试验证。
 
 **实际：**
@@ -340,26 +335,58 @@ Process finished with exit code 0
 
 ![删除元素](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211261431384.png)
 
-这里咱们结合着源码：
+`ArrayList` 删除元素的时候，有两种方式，一种是直接删除元素 `remove(obj)`，另一种是按照索引删除元素 `remove(index)`。
 
 ```java
+public boolean remove(Object o) {
+    final Object[] es = elementData;
+    final int size = this.size;
+    int i = 0;
+    found: {
+        if (o == null) {
+            for (; i < size; i++)
+                if (es[i] == null)
+                    break found;
+        } else {
+            for (; i < size; i++)
+                if (o.equals(es[i]))
+                    break found;
+        }
+        return false;
+    }
+    fastRemove(es, i);
+    return true;
+}
+
 public E remove(int index) {
-    rangeCheck(index);
-    modCount++;
-    E oldValue = elementData(index);
-    int numMoved = size - index - 1;
-    if (numMoved > 0)
-        System.arraycopy(elementData, index+1, elementData, index, numMoved);
-    elementData[--size] = null; // clear to let GC do its work
+    Objects.checkIndex(index, size);
+    final Object[] es = elementData;
+
+    @SuppressWarnings("unchecked") 
+    E oldValue = (E) es[index];
+    fastRemove(es, index);
+
     return oldValue;
+}
+```
+
+但从本质上来讲，都是一样的，因为它们最后调用的都是 `fastRemove(es, index)` 方法。
+
+```java
+private void fastRemove(Object[] es, int i) {
+    modCount++;
+    final int newSize;
+    if ((newSize = size - 1) > i)
+        System.arraycopy(es, i + 1, es, i, newSize - i);
+    es[size = newSize] = null;
 }
 ```
 
 删除的过程主要包括：
 
-1. 检查是否越界：`rangeCheck(index);`
-2. 计算删除元素时要移动的元素个数 `numMoved`，并通过 `System.arraycopy()` 方法将 `index + 1` 之后的元素复制给原数组 `index` 往后的位置，相当于将 `index` 之后的元素全部往前移动一位，即覆盖掉 `index` 位置原来的元素，从而到达删除的目的。
-3. 把最后一个元素清空，`null`。
+1. 如果是直接删除元素的话，则需要先遍历数组，找到元素对应的索引之后再进行删除；如果是按照索引删除元素，则首先需要检查是否越界：`Objects.checkIndex(index, size);`。
+2. 删除元素时需要移动的元素个数 `size - index - 1`，并通过 `System.arraycopy()` 方法将 `index + 1` 之后的元素复制给原数组 `index` 往后的位置，效果等同于将原数组中 `index` 之后的元素全部往前移动一位，即覆盖掉 `index` 位置原来的元素，从而到达删除的目的。从源码中可以看出，只要删除的不是最后一个元素，都需要数组重组，并且删除的元素位置越靠前，代价就越大。
+3. 清空最后一个元素的值 `null`。
 
 **这里咱们做个例子：**
 
@@ -387,3 +414,7 @@ Process finished with exit code 0
 
 - 这里可以看到指定位置 `index = 2` 的元素已经被删除掉。
 - 同时数组已经移动，用元素 `4` 占据了元素 `3` 的位置，依次类推，同时数组最后一个元素 `10` 还等待清空。这也就是为什么 `ArrayList` 源码中存在这样一行代码：`elementData[--size] = null;`。
+
+## 5. 总结
+
+`ArrayList`，如果有个中文名字的话，应该叫做 **动态数组**，也就是可增长的数组，可调整大小的数组。动态数组克服了静态数组的限制，静态数组的容量是固定的，且在首次创建的时候就已经指定。而动态数组会随着元素的增加自动调整大小，更符合实际的需求开发。

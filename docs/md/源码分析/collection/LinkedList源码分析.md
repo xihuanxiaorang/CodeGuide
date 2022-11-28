@@ -10,7 +10,7 @@ number headings: auto, first-level 1, max 6, _.1.1.
 
 # LinkedList 源码分析
 
-> 对于链表数据结构有不了解的小伙伴建议先阅读 [链表](../../数据结构与算法/数据结构/线性表/链表.md) 这一篇文章。
+> 阅读源码之前，强烈建议先去了解一下链表数据结构，最起码得知道链表数据结构的组成以及添加元素和删除元素时的动作，可以参考 [数据结构-链表](../../数据结构与算法/数据结构/线性表/链表.md) 这一篇文章。
 
 ## 1. 底层实现
 
@@ -19,8 +19,6 @@ number headings: auto, first-level 1, max 6, _.1.1.
 `LinkedList` 实现了 `List` 接口，继承自 `AbstractSequentialList` 抽象类。底层是 **基于双向链表实现** 的。它还实现了 `Deque` 接口，因此可以被当作堆栈（`Stack`）、队列（`Queue`）或双端队列（`Deque`）进行操作。关于栈和队列，现在首选使用 `ArrayDeque`，它有着比 `LinkedList`（被当作栈或队列使用时）有着更好的性能。
 
 ![LinkedList数据结构](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211270224996.png)
-
-
 
 ```java
 public class LinkedList<E>
@@ -33,7 +31,7 @@ public class LinkedList<E>
 }
 ```
 
-`LinkedList` 内部定义了一个 `Node` 节点，它包含三个部分：**元素内容 `item`，前引用 `prev` 和后引用 `next`**。`LinkedList` 的每个节点用 `Node` 表示。`LinkedList` 通过 **头节点 `first` 和尾节点 `last` 分别指向链表中的第一个和最后一个元素**。注意这里没有所谓的哑元，当链表为空的时候头节点 `first` 和尾节点 `last` 都指向 `null`。`Node` 节点代码如下所示：
+`LinkedList` 内部定义了一个 `Node` 节点，它包含三个部分：**元素内容 `item`，前驱指针 `prev` 和后继指针 `next`**。`LinkedList` 的每个节点用 `Node` 表示。`LinkedList` 通过 **头节点 `first` 和尾节点 `last` 分别指向链表中的第一个和最后一个元素**。注意这里没有所谓的哑元，当链表为空的时候头节点 `first` 和尾节点 `last` 都指向 `null`。`Node` 节点代码如下所示：
 
 ```java
 private static class Node<E> {
@@ -70,7 +68,7 @@ private void writeObject(java.io.ObjectOutputStream s)
 }
 ```
 
-发现没？`LinkedList` 在序列化的时候只保留了元素的内容 `item`，并没有保留元素的前后引用。这样就节省了不少内存空间，对吧？那有些小伙伴可能就要问了，只保留元素内容，不保留前后引用的话，那反序列化的时候怎么办？
+发现没？`LinkedList` 在序列化的时候只保留了元素的内容 `item`，并没有保留元素的前驱和后继指针。这样就节省了不少内存空间，对吧？那有些小伙伴可能就要问了，只保留元素内容，不保留前驱和后继指针的话，那反序列化的时候怎么办？
 
 ```java
 private void readObject(java.io.ObjectInputStream s)
@@ -150,11 +148,11 @@ Process finished with exit code 0
 
 ## 3. 插入
 
-`LinkedList` 的插入方法比较多，`List` 接口中默认提供的是 `add()` 方法，也可以插入指定位置。但在 `LinkedList` 中还提供了 **头插 `addFirst()` 和尾插 `addLast()` 方法**。
+`LinkedList` 的插入方法比较多，`List` 接口中默认提供的是 `add()` 方法，也可以插入指定位置。但在 `LinkedList` 中还提供了 **头插法 `addFirst()` 和尾插法 `addLast()` 方法**。
 
-### 3.1. 头插
+### 3.1. 头插法
 
-先来看一张 `ArrayList` 和 `LinkedList` 在头部插入元素时的对比图，如下：
+顾名思义就是每次添加元素时都是在将元素添加到其头部。先来看一张 `ArrayList` 和 `LinkedList` 在头部插入元素时的对比图，如下：
 
 ![插入对比](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211270316630.png)
 
@@ -165,7 +163,7 @@ Process finished with exit code 0
 
 #### 3.1.1. 源码
 
-这里咱们再对照下 `LinkedList` 头插的源码，如下：
+这里咱们再对照下 `LinkedList` 头插法的源码，如下：
 
 ```java
 private void linkFirst(E e) {
@@ -179,6 +177,10 @@ private void linkFirst(E e) {
     size++;
     modCount++;
 }
+```
+
+```ad-tip
+如果对于以下文字部分描述不太清楚的小伙伴，建议画下示意图帮助自己理解整个过程！
 ```
 
 - 创建临时节点 `f` 指向头节点 `first`，用于保存链表原来的头节点。
@@ -220,7 +222,7 @@ public void test_LinkedList_addFirst() {
 - 这里咱们分别验证 10 万、100 万、1000 万的数据量，在头插时的一个耗时情况。
 - 如咱们数据结构对比图中一样，`ArrayList` 需要做大量的移位和复制操作，而 `LinkedList` 的优势就体现出来了，耗时只是实例化一个对象。
 
-### 3.2. 尾插
+### 3.2. 尾插法
 
 先来看一张 `ArrayList` 和 `LinkedList` 在尾部插入元素时的对比图，如下：
 
@@ -233,7 +235,7 @@ public void test_LinkedList_addFirst() {
 
 #### 3.2.1. 源码
 
-这里咱们再对照下 `LinkedList` 尾插的源码，如下：
+这里咱们再对照下 `LinkedList` 尾插法的源码，如下：
 
 ```java
 void linkLast(E e) {
@@ -254,7 +256,7 @@ void linkLast(E e) {
 
 #### 3.2.2. 验证
 
-**`ArrayList` 和 `LinkedList` 尾插源码验证：**
+**`ArrayList` 和 `LinkedList` 尾插法源码验证：**
 
 ```java
 @Test
@@ -285,7 +287,7 @@ public void test_LinkedList_addLast() {
 - 这里咱们分别验证 10 万、100 万、1000 万的数据量，在尾插时的一个耗时情况。
 - 如咱们数据结构对比图中一样，`ArrayList` 不需要做移位拷贝也就不那么耗时了，而 `LinkedList` 则需要创建大量的对象。所以这里 `ArrayList` 尾插的效果要比 `LinkedList` 更好一些。
 
-### 3.3. 中间插
+### 3.3. 指定位置
 
 先来看一张 `ArrayList` 和 `LinkedList` 在中间插入元素时的对比图，如下：
 
@@ -484,95 +486,12 @@ E unlink(Node<E> x) {
 
 这部分源码主要有以下几个知识点：
 
-1. 获取待删除节点的信息；元素 `item`、元素下一个节点 `next`、元素上一个节点 `prev`。
-2. 如果待删除节点的上个节点 `prev` 为空（表明待删除节点的上个节点为头节点 `first`），则让头节点 `first` 指向待删除节点的下一个节点 `next`；否则的话让待删除节点的上个节点 `prev` 的 `next` 指向待删除节点的下一个节点 `next`。如果小伙伴们觉得困惑的话，可以画张图帮助自己理解。
+1. 获取待删除节点的信息；元素 `item`、后继指针 `next`、前驱指针 `prev`。
+2. 如果待删除节点的上个节点 `prev` 为空（表明待删除节点的上个节点为头节点 `first`），则让头节点 `first` 指向待删除节点的下一个节点 `next`；否则的话让待删除节点的上个节点 `prev` 的 `next` 指向待删除节点的下一个节点 `next`。
 3. 同样待删除节点的下一个节点 `next`，也执行步骤 2 同样操作。
 4. 最后是把删除节点设置为 `null`，元素个数 `size` 自减，数据结构修改次数 `modCount` 自增。
 
-## 5. 遍历
-
-接下来说下遍历，`ArrayList` 与 `LinkedList` 的遍历都是通用的，基本包括 5 种方式。
-
-这里咱们先初始化待遍历的集合，包含 1 千万数据：
-
-```java
-int xx = 0;
-@Before
-public void init() {
-    for (int i = 0; i < 10000000; i++) {
-        list.add(i);
-    }
-}
-```
-
-### 5.1. 普通 for 循环
-
-```java
-@Test
-public void test_LinkedList_for0() {
-    long startTime = System.currentTimeMillis();
-    for (int i = 0; i < list.size(); i++) {
-        xx += list.get(i);
-    }
-    System.out.println("耗时：" + (System.currentTimeMillis() - startTime));
-}
-```
-
-### 5.2. 增加 for 循环
-
-```java
-@Test
-public void test_LinkedList_for1() {
-    long startTime = System.currentTimeMillis();
-    for (Integer itr : list) {
-        xx += itr;
-    }
-    System.out.println("耗时：" + (System.currentTimeMillis() - startTime));
-}
-```
-
-### 5.3. Iterator 遍历
-
-```java
-@Test
-public void test_LinkedList_Iterator() {
-    long startTime = System.currentTimeMillis();
-    Iterator<Integer> iterator = list.iterator();
-    while (iterator.hasNext()) {
-        Integer next = iterator.next();
-        xx += next;
-    }
-    System.out.println("耗时：" + (System.currentTimeMillis() - startTime))
-}
-```
-
-### 5.4. forEach 循环
-
-```java
-@Test
-public void test_LinkedList_forEach() {
-    long startTime = System.currentTimeMillis();
-    list.forEach(integer -> {
-        xx += integer;
-    });
-    System.out.println("耗时：" + (System.currentTimeMillis() - startTime));
-}
-```
-
-### 5.5. stream 流
-
-```java
-@Test
-public void test_LinkedList_stream() {
-    long startTime = System.currentTimeMillis();
-    list.stream().forEach(integer -> {
-        xx += integer;
-    });
-    System.out.println("耗时：" + (System.currentTimeMillis() - startTime));
-}
-```
-
-## 6. 总结
+## 5. 总结
 
 - `ArrayList` 与 `LinkedList` 都有自己的使用场景，如果你不能很好的确定，那么就使用 `ArrayList`。但如果你能确定你在集合的首尾会有大量的插入、删除以及获取操作，那么可以使用 `LinkedList`，因为它都有相应的方法：`addFirst()`、`addLast()`、`removeFirst()`、`removeLast()`、`getFirst()`、`getLast()`，这些操作的时间复杂度都是 O(1)，非常高效。
 - `LinkedList` 的链表结构不一定会比 `ArrayList` 节省空间，首先它所占用的内存不是连续的，其次它还需要大量的实例化对象创建节点。虽然不一定节省空间，但链表结构也是非常优秀的数据结构，它能在你的程序设计中起着非常优秀的作用，例如可视化的链路追踪图，就需要用到链表结构，并需要每个节点自旋一次，用于串联业务。
