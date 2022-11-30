@@ -10,3 +10,6 @@ number headings: auto, first-level 1, max 6, _.1.1.
 ---
 
 # Java 集合面试题（上）
+
+## 1. ArrayList与LinkedList有什么区别？
+

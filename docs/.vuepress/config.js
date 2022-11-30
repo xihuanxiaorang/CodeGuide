@@ -190,8 +190,8 @@ module.exports = {
                     //     text: '导读', link: '/md/other/guide-to-reading.md'
                     // },
                     {
-                        text: 'Java',
-                        link: '/md/java/core/内部类.md'
+                        text: 'Java 核心技术',
+                        link: '/md/java/core/内部类.md',                       
                     },
                     {
                         text: '深入设计模式',
@@ -259,6 +259,14 @@ function genBarJava() {
             sidebarDepth: 0,
             children: [
                 "advanced/SPI机制详解.md"
+            ]
+        },
+        {
+            title: "Java 多线程",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "juc/Java并发编程.md"
             ]
         }
     ]
@@ -442,10 +450,6 @@ function genBarJavaInterview() {
                 "basic/Java基础面试题（下）.md",
             ]
         },
-        // {
-        //     title: 'xxx',
-        //     path: 'xxx.md', 
-        // },
         {
             title: "Java 集合",
             collapsable: false,
@@ -469,7 +473,11 @@ function genBarJavaInterview() {
             children: [
                 "Spring.md",
             ]
-        }
+        },
+        // {
+        //     title: 'xxx',
+        //     path: 'xxx.md', 
+        // },
     ]
 }
 

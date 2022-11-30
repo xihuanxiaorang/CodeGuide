@@ -292,8 +292,6 @@ final Node<K,V>[] resize() {
 
 ![hashmap-put](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211270906397.svg)
 
-
-
 ### 7.2. 源码分析
 
 ```java
@@ -381,37 +379,38 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent, boolean evict) {
 final void treeifyBin(Node<K,V>[] tab, int hash) {
 	// n是数组长度，index是要插入节点在数组中的数组下标，e指向遍历链表时的节点
     int n, index; Node<K,V> e;
-    if (tab == null || (n = tab.length) < MIN_TREEIFY_CAPACITY) // 判断tab是否为空或者tab的长度小于最小树化容量64
+    // 判断tab是否为空或者tab的长度小于最小树化容量64
+    if (tab == null || (n = tab.length) < MIN_TREEIFY_CAPACITY) 
 	    // 如果tab为空或者数组的长度小于64，则先不进行树化而是扩容  
-        resize();  
-    else if ((e = tab[index = (n - 1) & hash]) != null) { // hash & (n-1) => 当前要插入节点在数组中的数组下标index，e指向数组中当前位置的节点，判断当前位置是否存在节点
+        resize();
+    // hash & (n-1) => 当前要插入节点在数组中的数组下标index，e指向数组中当前位置的节点，判断当前位置是否存在节点
+    else if ((e = tab[index = (n - 1) & hash]) != null) { 
 	    // 满足当前数组下标位置处存在节点
 	    // hd是头节点，tl是尾节点
-        TreeNode<K,V> hd = null, tl = null;  
-        do { // 循环遍历链表，其实循环体中的代码就是将链表中的节点转化为红黑树节点并且形成一个双向链表的结构
-            TreeNode<K,V> p = replacementTreeNode(e, null);  
-                hd = p; // 头节点指向链表中的第一个节点  
+        TreeNode<K,V> hd = null, tl = null; 
+        // 循环遍历链表，其实循环体中的代码就是将链表中的节点转化为红黑树节点并且形成一个双向链表的结构 
+        do {
+            TreeNode<K,V> p = replacementTreeNode(e, null);
+	            // 头节点指向链表中的第一个节点  
+                hd = p;   
             else {
                 p.prev = tl;  
                 tl.next = p;  
             }  
             // 尾节点指向当前正在遍历的节点
             tl = p;  
-        } while ((e = e.next) != null);  
-        if ((tab[index] = hd) != null) // 将上面形成的双向链表结构放在当前数组下标位置处的数组中，并且判断头节点是否不为null 
+        } while ((e = e.next) != null);
+        // 将上面形成的双向链表结构放在当前数组下标位置处的数组中，并且判断头节点是否不为null
+        if ((tab[index] = hd) != null)  
 	        // 执行TreeNode中treeify方法将链表转化为真正的红黑树结构
             hd.treeify(tab);  
     }  
 }
 ```
 
-## 9. 待完善知识点
+### 8.2. 待完善知识点
 
 - [ ] 红黑树添加节点
 - [ ] 左旋
 - [ ] 右旋
-
-```ad-ref
-[HashMap二十三问 · 语雀](https://www.yuque.com/lovebetterworld/ioayz6/qx4frz#SpUEn)
-```
 

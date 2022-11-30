@@ -10,4 +10,5 @@ number headings: auto, first-level 1, max 6, _.1.1.
 
 # CopyOnWriteArrayList 源码分析
 
-> [没人看系列，CopyOnWriteArrayList 源码分析 - 掘金](https://juejin.cn/post/7066293612950061070#heading-0)
+
+
