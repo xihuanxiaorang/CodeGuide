@@ -1,5 +1,6 @@
 {
   "choices": [],
   "macros": [],
-  "inputPrompt": "single-line"
+  "inputPrompt": "single-line",
+  "devMode": false
 }

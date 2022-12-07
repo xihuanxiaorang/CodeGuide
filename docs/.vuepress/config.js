@@ -254,19 +254,20 @@ function genBarJava() {
             ]
         },
         {
-            title: "Java 进阶",
-            collapsable: false,
-            sidebarDepth: 0,
-            children: [
-                "advanced/SPI机制详解.md"
-            ]
-        },
-        {
             title: "Java 多线程",
             collapsable: false,
             sidebarDepth: 0,
             children: [
                 "juc/Java并发编程.md"
+            ]
+        },
+        {
+            title: "其他",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "other/SPI机制详解.md",
+                "other/杂记.md"
             ]
         }
     ]
@@ -456,6 +457,7 @@ function genBarJavaInterview() {
             sidebarDepth: 0,
             children: [
                 "collection/Java集合面试题（上）.md",
+                "collection/Java集合面试题（下）.md",
             ]
         },
         {
@@ -492,6 +494,7 @@ function genBarSourceCode() {
                 "collection/ArrayList源码分析.md",
                 "collection/LinkedList源码分析.md",
                 "collection/HashMap源码分析.md",
+                "collection/CopyOnWriteArrayList源码分析.md",
             ]
         },
         {

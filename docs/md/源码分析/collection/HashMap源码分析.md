@@ -14,6 +14,8 @@ number headings: auto, first-level 1, max 6, _.1.1.
 
 HashMap 底层的数据结构主要是：`数组 + 链表 + 红黑树 `。其中，在添加元素时，当链表的长度大于等于 8 并且数组的长度大于 64 时，链表会转化为红黑树；而在删除元素时，当红黑树的节点个数小于等于 6 时，红黑树会重新转化为链表。
 
+TODO update
+
 ![HashMap 数据结构.excalidraw](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211270906927.svg)
 
 ## 2. 重要属性

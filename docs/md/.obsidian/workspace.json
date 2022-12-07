@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "面试宝典/basic/Java基础面试题（下）.md",
+                "file": "源码分析/collection/CopyOnWriteArrayList源码分析.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "面试宝典/basic/Java基础面试题（下）.md",
+                "file": "源码分析/collection/CopyOnWriteArrayList源码分析.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "面试宝典/basic/Java基础面试题（下）.md"
+                "file": "源码分析/collection/CopyOnWriteArrayList源码分析.md"
               }
             }
           },
@@ -135,15 +135,15 @@
   },
   "active": "506d7fdcd30d99b8",
   "lastOpenFiles": [
-    "java/juc/Java并发编程.md",
-    "源码分析/collection/ArrayList源码分析.md",
-    "源码分析/collection/LinkedList源码分析.md",
-    "源码分析/collection/HashMap源码分析.md",
-    "源码分析/collection/CopyOnWriteArrayList 源码分析.md",
-    "面试宝典/basic/Java基础面试题（下）.md",
+    "Excalidraw/CopyOnWriteArrayList实现原理.excalidraw.md",
+    "源码分析/collection/CopyOnWriteArrayList源码分析.md",
     "面试宝典/collection/Java集合面试题（上）.md",
+    "Excalidraw/Drawing 2022-12-06 16.06.56.excalidraw.md",
+    "java/other/SPI机制详解.md",
+    "java/other/杂记.md",
+    "面试宝典/basic/Java基础面试题（下）.md",
     "面试宝典/basic/Java基础面试题（上）.md",
-    "面试宝典/README.md",
-    "源码分析/spring/Spring源码环境搭建.md"
+    "面试宝典/collection/Java集合面试题（下）.md",
+    "源码分析/collection/ArrayList源码分析.md"
   ]
 }

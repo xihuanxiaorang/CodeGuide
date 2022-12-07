@@ -211,7 +211,7 @@ public boolean add(E e) {
 图中介绍了当 `ArrayList` 可用空间长度不足时则需要进行扩容，这主要包括如下步骤：
 
 1. 判断长度充足：`ensureCapacityInternal(size + 1);`
-2. 当长度不足时，则通过扩大函数 `grow(int minCapacity)` 进行扩容
+2. 当长度不足时，则通过扩容函数 `grow(int minCapacity)` 进行扩容
 3. 扩容的长度计算：`int newCapacity = oldCapacity + (oldCapacity >> 1);`，旧容量 + 旧容量右移 1 位，这相当于扩容为原来容量的 `(int)3/2`。如，当数组长度为 10 时，10 转换成二进制为 1010，则 1010 + 1010 >> 1 = 1010 + 0101 = 10 + 5 = 15。
 4. 当扩容完之后，就需要把原数组中的数据拷贝到新数组中，这个过程会用到 `Arrays.copyOf(elementData, newCapacity);`，底层使用的是 `System.arraycopy()` 方法。
 
@@ -385,7 +385,7 @@ private void fastRemove(Object[] es, int i) {
 删除的过程主要包括：
 
 1. 如果是直接删除元素的话，则需要先遍历数组，找到元素对应的索引之后再进行删除；如果是按照索引删除元素，则首先需要检查是否越界：`Objects.checkIndex(index, size);`。
-2. 删除元素时需要移动的元素个数 `size - index - 1`，并通过 `System.arraycopy()` 方法将 `index + 1` 之后的元素复制给原数组 `index` 往后的位置，效果等同于将原数组中 `index` 之后的元素全部往前移动一位，即覆盖掉 `index` 位置原来的元素，从而到达删除的目的。从源码中可以看出，只要删除的不是最后一个元素，都需要数组重组，并且删除的元素位置越靠前，代价就越大。
+2. 删除元素时需要移动的元素个数 `size - index - 1`，并通过 `System.arraycopy()` 方法将 `index + 1` 之后的元素复制给原数组 `index` 往后的位置，效果等同于将原数组中 `index` 之后的元素全部往前移动一位，即覆盖掉 `index` 位置原来的元素，从而到达删除的目的。从源码中可以看出，只要删除的不是最后一个元素，都需要数组重组，并且 **删除的元素位置越靠前，代价就越大**。
 3. 清空最后一个元素的值 `null`。
 
 **这里咱们做个例子：**
